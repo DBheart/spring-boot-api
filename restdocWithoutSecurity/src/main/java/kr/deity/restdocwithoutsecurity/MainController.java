@@ -1,10 +1,10 @@
 package kr.deity.restdocwithoutsecurity;
 
-import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -34,6 +34,14 @@ public class MainController {
     @PostMapping("/dto")
     public void save(@Valid MainResponse mainResponse){
         System.out.println("mainResponse = " + mainResponse);
+    }
+
+    @GetMapping("/list")
+    public List<SimpleDto> list(){
+        SimpleDto simpleDto = new SimpleDto("test");
+        SimpleDto simpleDto2 = new SimpleDto("test2","url2");
+
+        return List.of(simpleDto, simpleDto2);
     }
 
 }

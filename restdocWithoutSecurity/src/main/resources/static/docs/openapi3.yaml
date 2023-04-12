@@ -60,6 +60,30 @@ paths:
       responses:
         "200":
           description: "200"
+  /user/list:
+    get:
+      tags:
+      - 테스트- list dto
+      summary: list dto 테스트- dto
+      description: list 테스트- dto
+      operationId: list dto
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user-list-207382118'
+              examples:
+                list dto:
+                  value: |-
+                    [ {
+                      "message" : "test",
+                      "url" : null
+                    }, {
+                      "message" : "test2",
+                      "url" : "url2"
+                    } ]
   /user/param:
     get:
       tags:
@@ -96,6 +120,17 @@ paths:
           description: "200"
 components:
   schemas:
+    user-list-207382118:
+      type: array
+      items:
+        type: object
+        properties:
+          message:
+            type: string
+            description: message
+          url:
+            type: string
+            description: url
     MainResponse:
       title: MainResponse
       type: object

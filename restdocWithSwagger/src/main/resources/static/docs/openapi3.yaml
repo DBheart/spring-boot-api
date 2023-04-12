@@ -4,10 +4,10 @@ info:
   description: An ecommerce sample demonstrating restdocs-api-spec
   version: 0.1.0
 servers:
-- url: https://localhost:8080
+- url: http://localhost:9020
 tags: []
 paths:
-  /user:
+  /sample:
     get:
       tags:
       - 테스트
@@ -20,7 +20,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MainResponse.Get'
+                $ref: '#/components/schemas/MainResponse'
               examples:
                 test-get:
                   value: |-
@@ -29,8 +29,8 @@ paths:
                     }
 components:
   schemas:
-    MainResponse.Get:
-      title: MainResponse.Get
+    MainResponse:
+      title: MainResponse
       type: object
       properties:
         message:
