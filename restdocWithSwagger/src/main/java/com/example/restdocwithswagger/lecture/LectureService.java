@@ -1,18 +1,17 @@
-package kr.deity.springboot2_x.lecture;
+package com.example.restdocwithswagger.lecture;
 
-import kr.deity.springboot2_x.lecture.entity.Lecture;
-import kr.deity.springboot2_x.lecture.entity.LectureRepository;
+import com.example.restdocwithswagger.lecture.entity.Lecture;
+import com.example.restdocwithswagger.lecture.entity.LectureRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
 @RequiredArgsConstructor
-@Transactional
+@Service
 public class LectureService {
     final LectureRepository lectureRepository;
+
     public List<Lecture> list() {
         return lectureRepository.findAll();
     }

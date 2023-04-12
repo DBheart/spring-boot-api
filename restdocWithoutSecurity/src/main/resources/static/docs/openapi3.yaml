@@ -1,0 +1,105 @@
+openapi: 3.0.1
+info:
+  title: Rest doc API
+  description: not security sample demonstrating restdocs-api-spec
+  version: 0.1.0
+servers:
+- url: http://localhost:9010
+tags: []
+paths:
+  /user:
+    get:
+      tags:
+      - 테스트
+      summary: Get 테스트
+      description: Get 테스트
+      operationId: test-get
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MainResponse'
+              examples:
+                test-get:
+                  value: |-
+                    {
+                      "message" : "get test success"
+                    }
+    post:
+      tags:
+      - 테스트- post body
+      summary: Post 테스트- body
+      description: Post 테스트- body
+      operationId: post param
+      parameters:
+      - name: message
+        in: query
+        description: message
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+  /user/dto:
+    post:
+      tags:
+      - 테스트- post dto
+      summary: Post 테스트- dto
+      description: Post 테스트- dto
+      operationId: post dto
+      parameters:
+      - name: message
+        in: query
+        description: message
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+  /user/param:
+    get:
+      tags:
+      - 테스트- get param
+      summary: Get 테스트- param
+      description: Get 테스트- param
+      operationId: get param
+      parameters:
+      - name: userId
+        in: query
+        description: user id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+  /user/get/{userId}:
+    get:
+      tags:
+      - 테스트- get path
+      summary: Get 테스트- path
+      description: Get 테스트- path
+      operationId: get path
+      parameters:
+      - name: userId
+        in: path
+        description: ""
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+components:
+  schemas:
+    MainResponse:
+      title: MainResponse
+      type: object
+      properties:
+        message:
+          type: string
+          description: 메세지

@@ -1,4 +1,4 @@
-package kr.deity.springboot2_x;
+package com.example.restdocwithswagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,7 +15,7 @@ public class SecurityConfig {
             "/swagger-resources/**",
             "/configuration/ui",
             "/configuration/security",
-            "/swagger-ui.html",
+            "/index.html",
             "/webjars/**",
             /* swagger v3 */
             "/v3/api-docs/**",

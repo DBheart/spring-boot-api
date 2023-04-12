@@ -17,3 +17,16 @@ API 문서에 따라서 달리한다.
 1. 인텔리제이를 사용하여 개발한다. 그에 따라서 달라지는 설정이 있을 것이다.
 2. 스프링부트 3.X부터 개발한다.
 3. java 버전까지 달리해야 할까?
+
+
+---
+
+스웨거 적용한 시스템 : springboot2_x
+rest doc, 시큐리티없이 진행한 시스템 : restdocWithoutSecurity
+  - [O] 컨트롤러까지 연결 성공
+  - [ ] 서비스까지 연결 확인
+rest doc, 시큐리티 있게 진행한 시스템(basic auth) : restdocWithSwagger
+  - [ ] basic로그인적용되어서 컨트롤러요청까지 확인
+  - [ ] basic로그인적용되어서 서비스까지 연결 확인
+
+rest doc + 시큐리티 + token적용 시스템 : 아직 없음. 해야함

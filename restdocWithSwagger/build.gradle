@@ -1,0 +1,81 @@
+//buildscript {
+//    ext {
+//        springBootVersion = '2.7.10'
+//    }
+//    repositories {
+//        mavenCentral()
+//        maven { url "https://plugins.gradle.org/m2/" }
+//    }
+//    dependencies {
+//        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+//        classpath("com.epages:restdocs-api-spec-gradle-plugin:0.9.5")
+//    }
+//}
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.10'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'com.epages.restdocs-api-spec' version '0.16.0'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    snippetsDir = file('build/generated-snippets')
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.h2database:h2'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    //swagger
+    testImplementation 'com.epages:restdocs-api-spec-mockmvc:0.16.2'
+
+}
+
+//rest doc file
+ext {
+    snippetsDir = file('build/generated-snippets')
+}
+
+tasks.named('test') {
+    outputs.dir snippetsDir
+    useJUnitPlatform()
+}
+
+
+openapi3 {
+    server = 'http://localhost:8080'
+    title = 'My API'
+    description = 'An ecommerce sample demonstrating restdocs-api-spec'
+    version = '0.1.0'
+    format = 'yaml'
+//    tagDescriptionsPropertiesFile = "src/test/resources/tags.yaml"
+
+    copy{
+        from 'build/api-spec'
+        into 'src/main/resources/static/docs'
+    }
+}
+
