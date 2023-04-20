@@ -8,6 +8,7 @@ class RestdocWithoutSecurityApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

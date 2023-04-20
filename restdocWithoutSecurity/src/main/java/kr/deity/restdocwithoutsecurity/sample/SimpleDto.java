@@ -1,4 +1,4 @@
-package kr.deity.restdocwithoutsecurity;
+package kr.deity.restdocwithoutsecurity.sample;
 
 import lombok.Data;
 

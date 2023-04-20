@@ -27,6 +27,23 @@ paths:
                     {
                       "message" : "get test success"
                     }
+  /sample/post:
+    post:
+      tags:
+      - 테스트- post body
+      summary: Post 테스트- body
+      description: Post 테스트- body
+      operationId: post param
+      parameters:
+      - name: message
+        in: query
+        description: message
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
 components:
   schemas:
     MainResponse:

@@ -1,4 +1,4 @@
-package kr.deity.restdocwithoutsecurity;
+package kr.deity.restdocwithoutsecurity.sample;
 
 import com.epages.restdocs.apispec.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,24 +7,24 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(MainController.class)
+@SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
+@Transactional
 class MainControllerTest {
 
     @Autowired
@@ -33,11 +33,10 @@ class MainControllerTest {
     @Test
     @DisplayName("Get 테스트")
     public void getTest() throws Exception {
-        mockMvc.perform(
-                        get("/user")
-                )
-                .andExpect(status().isOk())
-                .andDo(MockMvcRestDocumentationWrapper.document("test-get",
+        var actual = mockMvc.perform(get("/sample"));
+        actual.andDo(print());
+        actual.andExpect(status().isOk());
+        actual.andDo(MockMvcRestDocumentationWrapper.document("test-get",
                         ResourceSnippetParameters.builder()
                                 .tag("테스트")
                                 .summary("Get 테스트")
@@ -56,7 +55,7 @@ class MainControllerTest {
     @DisplayName("get path")
     public void getPathUri() throws Exception {
         //when
-        var actual = mockMvc.perform(get("/user/get/{userId}","path_kim"));
+        var actual = mockMvc.perform(get("/sample/get/{userId}","path_kim"));
 
         //then
         actual.andExpect(status().isOk())
@@ -84,7 +83,7 @@ class MainControllerTest {
         // given
         String message = "dto message";
         mockMvc.perform(
-                get("/user/param")
+                get("/sample/param")
                         .param("userId","kim")
 
         // when
@@ -115,11 +114,13 @@ class MainControllerTest {
 
         MainResponse mainResponse = new MainResponse("kim");
         var actual = mockMvc.perform(
-                post("/user")
+                post("/sample")
                         .param("message","deity")
 
 
         ).andExpect(status().isOk());
+
+        actual.andDo(print());
 
         actual.andDo(MockMvcRestDocumentationWrapper.document("post param",
                 preprocessRequest(prettyPrint()),
@@ -134,9 +135,6 @@ class MainControllerTest {
                                 ).build()
                 )
         ));
-
-
-        ;
     }
 
     @Test
@@ -146,7 +144,7 @@ class MainControllerTest {
         ObjectMapper mapper = new ObjectMapper();
 
         var actual = mockMvc.perform(
-                post("/user/dto")
+                post("/sample/dto")
                         .param("message","kim")
                         .contentType(MediaType.APPLICATION_JSON)
 //                        .content(mapper.writeValueAsString(mainResponse))
@@ -175,16 +173,16 @@ class MainControllerTest {
     @DisplayName("return list")
     void dtoListTest() throws Exception {
         // given
-        var actual = mockMvc.perform(get("/user/list"));
 
 
-        List<FieldDescriptor> returnResponse = List.of(
-                new ConstrainedFields(MainResponse.class).withPath("message").description("message"),
-                new ConstrainedFields(MainResponse.class).withPath("url").description("url")
-        );
         // when
-        actual.andExpect(status().isOk());
+        var actual = mockMvc.perform(get("/sample/list"));
+        actual.andDo(print());
+
         // then
+        actual.andExpect(status().isOk());
+
+        // document
         actual.andDo(MockMvcRestDocumentationWrapper.document("list dto",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
@@ -194,13 +192,13 @@ class MainControllerTest {
                                 .summary("list dto 테스트- dto")
                                 .description("list 테스트- dto")
                                 .responseFields(
-                                    fieldWithPath("[].message").type(JsonFieldType.STRING).description("message"),
-                                    fieldWithPath("[].url").type(JsonFieldType.STRING).description("url").optional()
+
+                                    fieldWithPath("[]").type(JsonFieldType.ARRAY).description("리턴데이터")
+//                                        fieldWithPath("[].message").type(JsonFieldType.STRING).description("message"),
+//                                        fieldWithPath("[].url").type(JsonFieldType.STRING).description("url").optional()
                                 )
                                 .build()
                 )
-
-
         ));
 
     }

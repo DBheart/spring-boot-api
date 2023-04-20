@@ -1,0 +1,43 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0.0",
+    "title" : "API documentation"
+  },
+  "host" : "localhost",
+  "tags" : [ ],
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/sample" : {
+      "get" : {
+        "tags" : [ "테스트" ],
+        "summary" : "Get 테스트",
+        "description" : "Get 테스트",
+        "operationId" : "test-get",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "examples" : {
+              "application/json" : "{\n  \"message\" : \"get test success\"\n}"
+            },
+            "schema" : {
+              "$ref" : "#/definitions/MainResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "MainResponse" : {
+      "type" : "object",
+      "properties" : {
+        "message" : {
+          "type" : "string",
+          "description" : "메세지"
+        }
+      }
+    }
+  }
+}
