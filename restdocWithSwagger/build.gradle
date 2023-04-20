@@ -1,3 +1,5 @@
+import io.swagger.v3.oas.models.security.SecurityScheme
+
 //buildscript {
 //    ext {
 //        springBootVersion = '2.7.10'
@@ -71,7 +73,6 @@ openapi3 {
     description = 'An ecommerce sample demonstrating restdocs-api-spec'
     version = '0.1.0'
     format = 'yaml'
-//    tagDescriptionsPropertiesFile = "src/test/resources/tags.yaml"
 
     copy{
         from 'build/api-spec'

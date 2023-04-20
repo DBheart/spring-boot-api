@@ -41,6 +41,7 @@
       url: "/static/docs/openapi3.yaml",
       dom_id: '#swagger-ui',
       deepLinking: true,
+      
       presets: [
         SwaggerUIBundle.presets.apis,
         SwaggerUIStandalonePreset
@@ -48,6 +49,10 @@
       plugins: [
         SwaggerUIBundle.plugins.DownloadUrl
       ],
+      requestInterceptor: function(req) {
+        req.headers.Authorization = 'Bearer ' + localStorage.getItem('accessToken')
+        return req
+      },
       layout: "StandaloneLayout"
     });
     // End Swagger UI call region

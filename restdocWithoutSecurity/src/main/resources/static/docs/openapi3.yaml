@@ -7,7 +7,51 @@ servers:
 - url: http://localhost:9010
 tags: []
 paths:
-  /user:
+  /lecture:
+    get:
+      tags:
+      - 수강신청
+      summary: 수강신청
+      description: 수강신청 테스트
+      operationId: lecture-list
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/lecture957993693'
+              examples:
+                lecture-list:
+                  value: "[ ]"
+    post:
+      tags:
+      - 수강신청
+      summary: 수강신청
+      description: 수강신청 저장
+      operationId: lecture save
+      parameters:
+      - name: name
+        in: query
+        description: 수강과목
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/lecture-741699920'
+              examples:
+                lecture save:
+                  value: |-
+                    [ {
+                      "seq" : 1,
+                      "name" : "수학"
+                    } ]
+  /sample:
     get:
       tags:
       - 테스트
@@ -43,7 +87,7 @@ paths:
       responses:
         "200":
           description: "200"
-  /user/dto:
+  /sample/dto:
     post:
       tags:
       - 테스트- post dto
@@ -60,7 +104,7 @@ paths:
       responses:
         "200":
           description: "200"
-  /user/list:
+  /sample/list:
     get:
       tags:
       - 테스트- list dto
@@ -73,18 +117,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/user-list-207382118'
+                $ref: '#/components/schemas/sample-list-10996445'
               examples:
                 list dto:
-                  value: |-
-                    [ {
-                      "message" : "test",
-                      "url" : null
-                    }, {
-                      "message" : "test2",
-                      "url" : "url2"
-                    } ]
-  /user/param:
+                  value: "[ ]"
+  /sample/param:
     get:
       tags:
       - 테스트- get param
@@ -101,7 +138,7 @@ paths:
       responses:
         "200":
           description: "200"
-  /user/get/{userId}:
+  /sample/get/{userId}:
     get:
       tags:
       - 테스트- get path
@@ -120,17 +157,37 @@ paths:
           description: "200"
 components:
   schemas:
-    user-list-207382118:
+    lecture957993693:
       type: array
+      description: 수강신청 리스트
+      items:
+        oneOf:
+        - type: object
+        - type: boolean
+        - type: string
+        - type: number
+    lecture-741699920:
+      type: array
+      description: 수강신청 과목 리스트
       items:
         type: object
         properties:
-          message:
+          name:
             type: string
-            description: message
-          url:
-            type: string
-            description: url
+            description: 수강신청 명
+          seq:
+            type: number
+            description: 수강신청 seq
+        description: 수강신청 과목 리스트
+    sample-list-10996445:
+      type: array
+      description: 리턴데이터
+      items:
+        oneOf:
+        - type: object
+        - type: boolean
+        - type: string
+        - type: number
     MainResponse:
       title: MainResponse
       type: object

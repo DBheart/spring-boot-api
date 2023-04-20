@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -19,25 +20,19 @@ public class LectureController {
     final LectureService lectureService;
 
     @GetMapping("/list")
-    public ResponseEntity<BaseResponse<List<Lecture>>> list() {
-        System.out.println("list is null");
-        List<Lecture> list = lectureService.list();
-        System.out.println("list = " + list);
-//        return null;
-        Lecture lecture = new Lecture();
-        lecture.setName("수학");
+    public BaseResponse<List<Lecture>> list() {
 
-        list.add(lecture);
+        List<Lecture> list = lectureService.list();
 
         BaseResponse<List<Lecture>> rtnLecture = new BaseResponse<>();
-        rtnLecture.setData(list);
 
-        return ResponseEntity.ok(rtnLecture);
+        return rtnLecture;
     }
 
     @PostMapping("/save")
-    public void save(Lecture lecture) {
+    public List<Lecture> save(@Valid Lecture lecture) {
         System.out.println("save");
         lectureService.save(lecture);
+        return lectureService.list();
     }
 }

@@ -1,23 +1,26 @@
-package kr.deity.restdocwithoutsecurity;
+package kr.deity.restdocwithoutsecurity.sample;
 
+import kr.deity.restdocwithoutsecurity.sample.MainResponse;
+import kr.deity.restdocwithoutsecurity.sample.SimpleDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/sample")
 public class MainController {
 
     @GetMapping
-    public ResponseEntity<MainResponse> get(){
+    public MainResponse get(){
         System.out.println("test user get");
-        return ResponseEntity.ok(new MainResponse("get test success"));
+        return new MainResponse("get test success");
     }
 
     @GetMapping("/get/{userId}")
-    public void get(@PathVariable String userId){
+    public void getPath(@PathVariable String userId){
         System.out.println("userId path= " + userId);
     }
 
@@ -41,7 +44,7 @@ public class MainController {
         SimpleDto simpleDto = new SimpleDto("test");
         SimpleDto simpleDto2 = new SimpleDto("test2","url2");
 
-        return List.of(simpleDto, simpleDto2);
+        return new ArrayList<>();
     }
 
 }
