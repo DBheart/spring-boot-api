@@ -46,3 +46,18 @@ rest doc + 시큐리티 + token적용 시스템 : 아직 없음. 해야함
   - swagger ui를 docker로 띄워서 보는 방법
     - 그럼 api spec에서 스웨거 설정은 없어도 되는것 같다.
 4. springboot3와 시큐리티, api spec의 연결 사용접점
+
+
+---
+
+<api spec 사용방법>
+우선은 gradle에 있는 아래것을 실행한다.
+  - build와 clean은 Task - build에 있다
+  - openapi3는 Task - documentation에 있다.
+
+1. build를 실행한다.
+2. clean을 한다.
+3. openapi3를 실행한다.
+
+호스트:port:/docs/index.html로 접속한다. swagger-ui가 보일 것이다.
+  - ex : http://localhost:9020/docs/index.html
