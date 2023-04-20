@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.operation.preprocess.Preprocessors;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.restdocs.payload.JsonFieldType;
@@ -41,7 +42,7 @@ public class LectureControllerTest {
     @WithMockUser(username = "USER", password = "1234", roles = "USER")
     public void list() throws Exception {
 
-        var actual = mockMvc.perform(get("/lecture/list"));
+        var actual = mockMvc.perform(RestDocumentationRequestBuilders.get("/lecture/list"));
         actual.andExpect(status().isOk());
 
         actual.andDo(print());
@@ -84,7 +85,7 @@ public class LectureControllerTest {
     public void save() throws Exception {
         Lecture lecture = new Lecture();
         lecture.setName("math");
-        var actual = mockMvc.perform(post("/lecture/save")
+        var actual = mockMvc.perform(RestDocumentationRequestBuilders.post("/lecture/save")
                         .param("name","math")
                 );
         actual.andExpect(status().isOk());
