@@ -5,8 +5,13 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import io.swagger.v3.oas.models.media.Content;
+import io.swagger.v3.oas.models.responses.ApiResponse;
+import io.swagger.v3.oas.models.media.MediaType;
+import io.swagger.v3.oas.models.media.Schema;
 
 @Configuration
 public class SwaggerConfig {
@@ -38,4 +43,15 @@ public class SwaggerConfig {
                 .version("0.1");
 
     }
+
+    @Bean
+    public OpenApiCustomiser consumerTypeHeaderOpenAPICustomiser() {
+        return openApi -> openApi.getPaths().values().stream().flatMap(pathItem -> pathItem.readOperations().stream())
+                .forEach(operation -> operation.getResponses().addApiResponse("500", new ApiResponse().description("FAIL")
+                        .content(new Content().addMediaType("application/json",
+                                new MediaType().schema(new Schema().$ref("#/components/schemas/BaseResponse"))))));
+    }
+
+
+
 }

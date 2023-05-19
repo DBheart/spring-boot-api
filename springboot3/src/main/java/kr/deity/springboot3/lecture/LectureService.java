@@ -14,6 +14,8 @@ public class LectureService {
 
     public void save(Lecture lecture) {
         lectureRepository.save(lecture);
+
+        var a = 100_000;
     }
 
     public List<Lecture> list() {

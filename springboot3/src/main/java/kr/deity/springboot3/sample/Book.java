@@ -3,7 +3,6 @@ package kr.deity.springboot3.sample;
 import java.util.Objects;
 
 public record Book(String title, String author, String isbn) {
-
     public Book{
         Objects.requireNonNullElse(title,"마지막잎새");
         Objects.requireNonNullElse(author,"무명");
