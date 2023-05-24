@@ -7,6 +7,57 @@ servers:
 - url: http://localhost:9020
 tags: []
 paths:
+  /lecture/list:
+    get:
+      tags:
+      - 결품/지연 등록처리(위수탁)
+      summary: 결품/지연 조회
+      description: 결품/지연 조회
+      operationId: list
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/lecture-list-1326974044'
+              examples:
+                list:
+                  value: |-
+                    {
+                      "status" : "SUCCESS",
+                      "code" : 200,
+                      "message" : "Requested Successful",
+                      "data" : null
+                    }
+  /lecture/save:
+    post:
+      tags:
+      - 결품/지연 등록처리(위수탁)
+      summary: 결품/지연 조회
+      description: 결품/지연 조회
+      operationId: lecture-save
+      parameters:
+      - name: name
+        in: query
+        description: 수강과목
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/lecture-save1007353693'
+              examples:
+                lecture-save:
+                  value: |-
+                    [ {
+                      "seq" : 1,
+                      "name" : "math"
+                    } ]
   /sample:
     get:
       tags:
@@ -27,7 +78,7 @@ paths:
                     {
                       "message" : "get test success"
                     }
-  /sample/post:
+  /sample/dto:
     post:
       tags:
       - 테스트- post body
@@ -44,8 +95,50 @@ paths:
       responses:
         "200":
           description: "200"
+  /sample/get/{userId}:
+    get:
+      tags:
+      - 테스트- get path
+      summary: Get 테스트- path
+      description: Get 테스트- path
+      operationId: get path
+      parameters:
+      - name: userId
+        in: path
+        description: ""
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
 components:
   schemas:
+    lecture-list-1326974044:
+      type: object
+      properties:
+        code:
+          type: number
+          description: 상태코드
+        message:
+          type: string
+          description: 메시지
+        status:
+          type: string
+          description: 상태
+    lecture-save1007353693:
+      type: array
+      description: 강의목록
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: 강의명
+          seq:
+            type: number
+            description: 강의코드
+        description: 강의목록
     MainResponse:
       title: MainResponse
       type: object

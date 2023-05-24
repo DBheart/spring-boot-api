@@ -14,19 +14,27 @@ import java.util.Map;
 @RestController
 @RequestMapping("/web")
 public class WebController {
-
     @GetMapping("/list")
-    public DataResponse<List<Map<String, String>>> list() {
-        List<Map<String, String>> list = new ArrayList<>();
+    public DataResponse<List<WebDataResponse>> list() {
+        List<WebDataResponse> list = new ArrayList<>();
 
-        Map<String, String> data = new HashMap<>();
+//        Map<String, String> data = new HashMap<>();
+//
+//        data.put("1", "test1");
+//        data.put("2", "test2");
+//        list.add(data);
 
-        data.put("1", "test1");
-        data.put("2", "test2");
+        WebDataResponse data1 = new WebDataResponse("id1", "name1");
+        WebDataResponse data2 = new WebDataResponse("id2", "name2");
 
-        list.add(data);
+
+        list.add(data1);
+        list.add(data2);
 
         return new DataResponse(list);
+    }
+
+    record WebDataResponse(String id, String name) {
     }
 
     @GetMapping("/list/500")

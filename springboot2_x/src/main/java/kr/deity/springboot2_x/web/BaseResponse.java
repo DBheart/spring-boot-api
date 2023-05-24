@@ -4,15 +4,18 @@ import lombok.Data;
 
 @Data
 public class BaseResponse {
-    String code;
+    int status;
+    String error;
     String message;
 
     public BaseResponse(){
-        this.code = "SUCCESS";
+        this.status = 200;
+        this.error = "SUCCESS";
         this.message="";
     }
     public BaseResponse(String message) {
-        this.code="FAIL";
+        this.status = 500;
+        this.error="FAIL";
         this.message = message;
     }
 }

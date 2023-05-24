@@ -12,7 +12,7 @@ public class CustomResponseEntityExceptionHandler {
 
     @ExceptionHandler(InvalidInputException.class)
     protected ResponseEntity<BaseResponse> invalidInputException(InvalidInputException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BaseResponse(e.getMessage()));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new BaseResponse(e.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -21,6 +21,6 @@ public class CustomResponseEntityExceptionHandler {
                 .findFirst().map(fieldError ->
                         String.format("%s 오류. %s", fieldError.getField(), fieldError.getDefaultMessage()))
                 .orElse(e.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BaseResponse(message));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new BaseResponse(message));
     }
 }

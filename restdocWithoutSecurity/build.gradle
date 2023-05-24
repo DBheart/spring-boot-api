@@ -19,6 +19,10 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+	snippetsDir = file('build/generated-snippets')
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -33,11 +37,6 @@ dependencies {
 	testImplementation 'com.epages:restdocs-api-spec-mockmvc:0.16.2'
 }
 
-//rest doc file
-ext {
-	snippetsDir = file('build/generated-snippets')
-}
-
 
 tasks.named('test') {
 	outputs.dir snippetsDir
@@ -45,22 +44,14 @@ tasks.named('test') {
 }
 
 openapi3 {
-	server = 'http://localhost:9010'
-	title = 'Rest doc API'
-	description = 'not security sample demonstrating restdocs-api-spec'
+	server = 'http://localhost:9020'
+	title = 'My API'
+	description = 'An ecommerce sample demonstrating restdocs-api-spec'
 	version = '0.1.0'
 	format = 'yaml'
 
 	copy{
 		from 'build/api-spec'
 		into 'src/main/resources/static/docs'
-	}
-}
-
-task copyTest {
-	dependsOn("openapi3")
-	copy {
-		from "$buildDir/api-spec/openapi3.yaml"
-		into "src/main/resources/static/docs/."
 	}
 }

@@ -1,10 +1,10 @@
 openapi: 3.0.1
 info:
-  title: Rest doc API
-  description: not security sample demonstrating restdocs-api-spec
+  title: My API
+  description: An ecommerce sample demonstrating restdocs-api-spec
   version: 0.1.0
 servers:
-- url: http://localhost:9010
+- url: http://localhost:9020
 tags: []
 paths:
   /lecture:
@@ -155,8 +155,45 @@ paths:
       responses:
         "200":
           description: "200"
+  /web/list/recode:
+    get:
+      tags:
+      - 결품/지연 등록처리(위수탁)
+      summary: 결품/지연 조회
+      description: 결품/지연 조회
+      operationId: web-test
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/web-list-recode-1974344496'
+              examples:
+                web-test:
+                  value: |-
+                    [ {
+                      "id" : "id1",
+                      "name" : "name1"
+                    }, {
+                      "id" : "id2",
+                      "name" : "name2"
+                    } ]
 components:
   schemas:
+    web-list-recode-1974344496:
+      type: array
+      description: 데이터
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: 이름
+          id:
+            type: string
+            description: 아이디
+        description: 데이터
     lecture957993693:
       type: array
       description: 수강신청 리스트
