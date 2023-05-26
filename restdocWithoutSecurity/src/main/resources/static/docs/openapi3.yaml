@@ -4,7 +4,7 @@ info:
   description: An ecommerce sample demonstrating restdocs-api-spec
   version: 0.1.0
 servers:
-- url: http://localhost:9020
+- url: http://localhost:9010
 tags: []
 paths:
   /lecture:
@@ -155,12 +155,44 @@ paths:
       responses:
         "200":
           description: "200"
+  /web/list/404:
+    get:
+      tags:
+      - 웹 프로그래밍 테스트
+      summary: 데이터 없음
+      description: 데이터 없음
+      operationId: web-test3
+      responses:
+        "404":
+          description: "404"
+  /web/list/500:
+    get:
+      tags:
+      - 웹 프로그래밍 테스트
+      summary: 실패 확인
+      description: 실패 확인
+      operationId: web-test2
+      responses:
+        "500":
+          description: "500"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/web-list-500314873975'
+              examples:
+                web-test2:
+                  value: |-
+                    {
+                      "status" : 500,
+                      "error" : "FAIL",
+                      "message" : "서버오류가 발생하였습니다."
+                    }
   /web/list/recode:
     get:
       tags:
-      - 결품/지연 등록처리(위수탁)
-      summary: 결품/지연 조회
-      description: 결품/지연 조회
+      - 웹 프로그래밍 테스트
+      summary: 데이터 조회
+      description: 데이터 조회
       operationId: web-test
       responses:
         "200":
@@ -194,6 +226,18 @@ components:
             type: string
             description: 아이디
         description: 데이터
+    web-list-500314873975:
+      type: object
+      properties:
+        message:
+          type: string
+          description: 오류 메세지
+        error:
+          type: string
+          description: 실패 유무
+        status:
+          type: number
+          description: HTTP STATUS
     lecture957993693:
       type: array
       description: 수강신청 리스트

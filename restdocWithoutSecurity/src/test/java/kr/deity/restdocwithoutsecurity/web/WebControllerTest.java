@@ -64,8 +64,8 @@ class WebControllerTest {
                 preprocessResponse(prettyPrint()),
                 ResourceDocumentation.resource(
                         ResourceSnippetParameters.builder()
-                        .description("결품/지연 조회")
-                        .tag("결품/지연 등록처리(위수탁)")
+                        .description("데이터 조회")
+                        .tag("웹 프로그래밍 테스트")
                         .responseFields(
                                 fieldWithPath("[]").description("데이터"),
                                 fieldWithPath("[].id").description("아이디"),
@@ -82,13 +82,13 @@ class WebControllerTest {
         actual.andDo(MockMvcResultHandlers.print());
         actual.andExpect(MockMvcResultMatchers.status().is5xxServerError());
 
-        actual.andDo(MockMvcRestDocumentationWrapper.document("web-test",
+        actual.andDo(MockMvcRestDocumentationWrapper.document("web-test2",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
                 ResourceDocumentation.resource(
                         ResourceSnippetParameters.builder()
-                                .description("결품/지연 조회")
-                                .tag("결품/지연 등록처리(위수탁)")
+                                .description("실패 확인")
+                                .tag("웹 프로그래밍 테스트")
                                 .responseFields(
                                         fieldWithPath("status").description("HTTP STATUS"),
                                         fieldWithPath("error").description("실패 유무"),
@@ -101,10 +101,18 @@ class WebControllerTest {
 
     @Test
     public void notApiCall() throws Exception {
-        var actual = mockMvc.perform(MockMvcRequestBuilders.get("/web/list/404"));
+        var actual = mockMvc.perform(RestDocumentationRequestBuilders.get("/web/list/404"));
         actual.andDo(MockMvcResultHandlers.print());
         actual.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 
+        actual.andDo(MockMvcRestDocumentationWrapper.document("web-test3",
+                preprocessRequest(prettyPrint()),
+                preprocessResponse(prettyPrint()),
+                ResourceDocumentation.resource(
+                        ResourceSnippetParameters.builder().description("데이터 없음").tag("웹 프로그래밍 테스트").build()
+                )
+
+        ));
 
     }
 
