@@ -61,7 +61,7 @@ paths:
   /sample:
     get:
       tags:
-      - 테스트
+      - 테스트 param
       summary: Get 테스트
       description: Get 테스트
       operationId: test-get
@@ -81,7 +81,7 @@ paths:
   /sample/dto:
     post:
       tags:
-      - 테스트- post body
+      - 테스트 param
       summary: Post 테스트- body
       description: Post 테스트- body
       operationId: post param
@@ -98,7 +98,7 @@ paths:
   /sample/get/{userId}:
     get:
       tags:
-      - 테스트- get path
+      - 테스트 param
       summary: Get 테스트- path
       description: Get 테스트- path
       operationId: get path
@@ -112,6 +112,62 @@ paths:
       responses:
         "200":
           description: "200"
+  /web/400:
+    get:
+      tags:
+      - 웹테스트
+      summary: 데이터 없음
+      description: 데이터 없음
+      operationId: web-not-page
+      responses:
+        "401":
+          description: "401"
+  /web/500:
+    get:
+      tags:
+      - 웹테스트
+      summary: 웹 서버오류
+      description: 웹 서버오류
+      operationId: web-server-error
+      responses:
+        "500":
+          description: "500"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/web-500436436699'
+              examples:
+                web-server-error:
+                  value: |-
+                    {
+                      "status" : 500,
+                      "error" : "FAIL",
+                      "message" : "500 INTERNAL_SERVER_ERROR \"서버오류가 발생하였습니다.\""
+                    }
+  /web/list:
+    get:
+      tags:
+      - 웹테스트
+      summary: 웹 성공테스트
+      description: 웹 성공테스트
+      operationId: web-list-success
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/web-list1745388528'
+              examples:
+                web-list-success:
+                  value: |-
+                    [ {
+                      "id" : "deity",
+                      "name" : "name1"
+                    }, {
+                      "id" : "deity2",
+                      "name" : "name2"
+                    } ]
 components:
   schemas:
     lecture-list-1326974044:
@@ -139,6 +195,31 @@ components:
             type: number
             description: 강의코드
         description: 강의목록
+    web-list1745388528:
+      type: array
+      description: 웹데이터
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: 이름
+          id:
+            type: string
+            description: 아이디
+        description: 웹데이터
+    web-500436436699:
+      type: object
+      properties:
+        message:
+          type: string
+          description: 오류 메세지
+        error:
+          type: string
+          description: 오류코드
+        status:
+          type: number
+          description: status
     MainResponse:
       title: MainResponse
       type: object

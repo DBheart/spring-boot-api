@@ -54,7 +54,7 @@ paths:
   /sample:
     get:
       tags:
-      - 테스트
+      - 테스트 param
       summary: Get 테스트
       description: Get 테스트
       operationId: test-get
@@ -73,7 +73,7 @@ paths:
                     }
     post:
       tags:
-      - 테스트- post body
+      - 테스트 param
       summary: Post 테스트- body
       description: Post 테스트- body
       operationId: post param
@@ -90,7 +90,7 @@ paths:
   /sample/dto:
     post:
       tags:
-      - 테스트- post dto
+      - 테스트 param
       summary: Post 테스트- dto
       description: Post 테스트- dto
       operationId: post dto
@@ -107,7 +107,7 @@ paths:
   /sample/list:
     get:
       tags:
-      - 테스트- list dto
+      - 테스트 param
       summary: list dto 테스트- dto
       description: list 테스트- dto
       operationId: list dto
@@ -124,7 +124,7 @@ paths:
   /sample/param:
     get:
       tags:
-      - 테스트- get param
+      - 테스트 param
       summary: Get 테스트- param
       description: Get 테스트- param
       operationId: get param
@@ -141,7 +141,7 @@ paths:
   /sample/get/{userId}:
     get:
       tags:
-      - 테스트- get path
+      - 테스트 param
       summary: Get 테스트- path
       description: Get 테스트- path
       operationId: get path

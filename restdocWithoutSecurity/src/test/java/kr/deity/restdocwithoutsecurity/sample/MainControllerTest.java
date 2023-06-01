@@ -38,7 +38,7 @@ class MainControllerTest {
         actual.andExpect(status().isOk());
         actual.andDo(MockMvcRestDocumentationWrapper.document("test-get",
                         ResourceSnippetParameters.builder()
-                                .tag("테스트")
+                                .tag("테스트 param")
                                 .summary("Get 테스트")
                                 .description("Get 테스트")
                                 .responseSchema(Schema.schema("MainResponse"))
@@ -62,7 +62,7 @@ class MainControllerTest {
 
         .andDo(MockMvcRestDocumentationWrapper.document("get path",
                 ResourceSnippetParameters.builder()
-                        .tag("테스트- get path")
+                        .tag("테스트 param")
                         .summary("Get 테스트- path")
                         .description("Get 테스트- path")
                         .requestParameters(
@@ -97,7 +97,7 @@ class MainControllerTest {
             preprocessResponse(prettyPrint()),
             ResourceDocumentation.resource(
                 ResourceSnippetParameters.builder()
-                    .tag("테스트- get param")
+                    .tag("테스트 param")
                     .summary("Get 테스트- param")
                     .description("Get 테스트- param")
                     .requestParameters(
@@ -127,7 +127,7 @@ class MainControllerTest {
                 preprocessResponse(prettyPrint()),
                 ResourceDocumentation.resource(
                         ResourceSnippetParameters.builder()
-                                .tag("테스트- post body")
+                                .tag("테스트 param")
                                 .summary("Post 테스트- body")
                                 .description("Post 테스트- body")
                                 .requestParameters(
@@ -156,7 +156,7 @@ class MainControllerTest {
                 preprocessResponse(prettyPrint()),
                 ResourceDocumentation.resource(
                         ResourceSnippetParameters.builder()
-                                .tag("테스트- post dto")
+                                .tag("테스트 param")
                                 .summary("Post 테스트- dto")
                                 .description("Post 테스트- dto")
                                 .requestParameters(
@@ -188,7 +188,7 @@ class MainControllerTest {
                 preprocessResponse(prettyPrint()),
                 ResourceDocumentation.resource(
                         ResourceSnippetParameters.builder()
-                                .tag("테스트- list dto")
+                                .tag("테스트 param")
                                 .summary("list dto 테스트- dto")
                                 .description("list 테스트- dto")
                                 .responseFields(

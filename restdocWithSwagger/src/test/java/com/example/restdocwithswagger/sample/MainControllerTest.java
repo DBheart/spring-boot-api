@@ -45,7 +45,7 @@ class MainControllerTest {
                 .andExpect(status().isOk())
                 .andDo(MockMvcRestDocumentationWrapper.document("test-get",
                         ResourceSnippetParameters.builder()
-                                .tag("테스트")
+                                .tag("테스트 param")
                                 .summary("Get 테스트")
                                 .description("Get 테스트")
                                 .responseSchema(Schema.schema("MainResponse"))
@@ -73,7 +73,7 @@ class MainControllerTest {
 
                 .andDo(MockMvcRestDocumentationWrapper.document("get path",
                         ResourceSnippetParameters.builder()
-                                .tag("테스트- get path")
+                                .tag("테스트 param")
                                 .summary("Get 테스트- path")
                                 .description("Get 테스트- path")
                                 .requestParameters(
@@ -116,7 +116,7 @@ class MainControllerTest {
                 preprocessResponse(prettyPrint()),
                 ResourceDocumentation.resource(
                         ResourceSnippetParameters.builder()
-                                .tag("테스트- post body")
+                                .tag("테스트 param")
                                 .summary("Post 테스트- body")
                                 .requestParameters(
                                         ResourceDocumentation.parameterWithName("message").description("message")
