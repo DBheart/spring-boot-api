@@ -1,0 +1,46 @@
+# curl -X 'POST'
+#  'http://localhost:7090/web/post/string'
+#  -H 'accept: */*'
+#  -H 'Content-Type: application/json'
+#  -d '"string"'
+POST http://localhost:7090/web/post/string
+accept: */*
+Content-Type: application/json
+
+"string"
+
+###
+# curl -X 'POST'
+#  'http://localhost:7090/web/post/dto'
+#  -H 'accept: */*'
+#  -H 'Content-Type: application/json'
+#  -d '{
+#  "id": "deity",
+#  "name": "name"
+#}'
+POST http://localhost:7090/web/post/dto
+accept: */*
+Content-Type: application/json
+
+{
+  "id": "deity",
+  "name": "name"
+}
+
+### default
+GET http://localhost:7090/web/get
+
+### param
+GET http://localhost:7090/web/param?userId=deity
+
+### path
+GET http://localhost:7090/web/get/deity
+
+### response list
+GET http://localhost:7090/web/list
+
+### response not page
+GET http://localhost:7090/web/400
+
+### response server errror
+GET http://localhost:7090/web/500

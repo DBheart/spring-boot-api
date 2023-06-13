@@ -1,0 +1,32 @@
+POST http://localhost:7070/post/string
+accept: application/json
+Content-Type: application/json
+
+{"userId": "deity2"}
+
+###
+POST http://localhost:7070/post/dto
+accept: application/json
+Content-Type: application/json
+
+{
+  "id":"deity","name": "김규표"
+}
+
+### default
+GET http://localhost:7070/get
+
+### param
+GET http://localhost:7070/param?userId=deity
+
+### path
+GET http://localhost:7070/get/deity
+
+### response list
+GET http://localhost:7070/list
+
+### response not page
+GET http://localhost:7070/400
+
+### response server errror
+GET http://localhost:7070/500
