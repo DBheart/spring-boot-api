@@ -1,0 +1,108 @@
+openapi: 3.0.1
+info:
+  title: My API
+  description: An ecommerce sample demonstrating restdocs-api-spec
+  version: 0.1.0
+servers:
+- url: http://localhost:7090
+tags: []
+paths:
+  /web/400:
+    get:
+      tags:
+      - 웹테스트
+      summary: 없는 API
+      description: 없는 API
+      operationId: web-notfound
+      responses:
+        "404":
+          description: "404"
+  /web/500:
+    get:
+      tags:
+      - 웹테스트
+      summary: 웹 서버오류
+      description: 웹 서버오류
+      operationId: web-error
+      responses:
+        "500":
+          description: "500"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/web-500436436699'
+              examples:
+                web-error:
+                  value: |-
+                    {
+                      "message" : "500 INTERNAL_SERVER_ERROR \"서버팀에 문의하세요\"",
+                      "status" : 500,
+                      "error" : "FAIL"
+                    }
+  /web/list:
+    get:
+      tags:
+      - 웹테스트
+      summary: 웹 성공테스트
+      description: 웹 성공테스트
+      operationId: web-list-success
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/web-list-1503620117'
+              examples:
+                web-list-success:
+                  value: |-
+                    {
+                      "data" : [ {
+                        "id" : "deity",
+                        "name" : "name"
+                      }, {
+                        "id" : "deity2",
+                        "name" : "name2"
+                      } ],
+                      "status" : 200,
+                      "error" : "SUCCESS",
+                      "message" : ""
+                    }
+components:
+  schemas:
+    web-500436436699:
+      type: object
+      properties:
+        message:
+          type: string
+          description: 오류 메세지
+        error:
+          type: string
+          description: 오류코드
+        status:
+          type: number
+          description: status
+    web-list-1503620117:
+      type: object
+      properties:
+        data:
+          type: array
+          description: 웹데이터
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: 이름
+              id:
+                type: string
+                description: 아이디
+        message:
+          type: string
+          description: http method
+        error:
+          type: string
+          description: http method
+        status:
+          type: number
+          description: http method

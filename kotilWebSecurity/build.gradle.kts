@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
     kotlin("plugin.jpa") version "1.6.21"
+    id("com.epages.restdocs-api-spec")  version "0.16.0"
 }
 
 group = "kr.pe.deity"
@@ -28,8 +29,12 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
 
-    implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
+//    implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
+
+    testImplementation("com.epages:restdocs-api-spec-mockmvc:0.16.2")
 }
+
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
@@ -41,3 +46,35 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+openapi3 {
+    this.setServer("http://localhost:7090")
+    title = "My API"
+    description = "An ecommerce sample demonstrating restdocs-api-spec"
+    version ="0.1.0"
+    format = "yaml" // or json
+}
+
+tasks.register<Copy>("copyOasToSwagger") {
+    // 기존 OAS 파일 삭제
+    delete("src/main/resources/static/docs/openapi3.yaml")
+    delete("src/main/resources/static/docs/postman-collection.json")
+    from("$buildDir/api-spec/openapi3.yaml") // 복제할 OAS 파일 지정
+    from("$buildDir/api-spec/postman-collection.json") // 복제할 OAS 파일 지정
+    into("src/main/resources/static/docs/.") // 타겟 디렉터리로 파일 복제
+    dependsOn("openapi3") // openapi3 Task가 먼저 실행되도록 설정
+    dependsOn("postman")
+}
+
+//openapi3 {
+//    server = 'http://localhost:9020'
+//    title = 'My API'
+//    description = 'An ecommerce sample demonstrating restdocs-api-spec'
+//    version = '0.1.0'
+//    format = 'yaml'
+//
+//    copy{
+//        from 'build/api-spec'
+//        into 'src/main/resources/static/docs'
+//    }
+//}

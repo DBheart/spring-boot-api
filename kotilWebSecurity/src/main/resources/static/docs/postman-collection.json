@@ -1,0 +1,106 @@
+{
+  "info" : {
+    "name" : "API documentation",
+    "version" : "1.0.0",
+    "schema" : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item" : [ {
+    "id" : "web-notfound",
+    "name" : "/web/400",
+    "description" : "없는 API",
+    "variable" : [ ],
+    "event" : [ ],
+    "request" : {
+      "url" : {
+        "protocol" : "http",
+        "host" : "localhost",
+        "path" : "/web/400"
+      },
+      "method" : "GET"
+    },
+    "response" : [ {
+      "id" : "web-notfound",
+      "name" : "web-notfound",
+      "originalRequest" : {
+        "url" : {
+          "protocol" : "http",
+          "host" : "localhost",
+          "path" : "/web/400"
+        },
+        "method" : "GET"
+      },
+      "cookie" : [ ],
+      "code" : 404
+    } ]
+  }, {
+    "id" : "web-error",
+    "name" : "/web/500",
+    "description" : "웹 서버오류",
+    "variable" : [ ],
+    "event" : [ ],
+    "request" : {
+      "url" : {
+        "protocol" : "http",
+        "host" : "localhost",
+        "path" : "/web/500"
+      },
+      "method" : "GET"
+    },
+    "response" : [ {
+      "id" : "web-error",
+      "name" : "web-error",
+      "originalRequest" : {
+        "url" : {
+          "protocol" : "http",
+          "host" : "localhost",
+          "path" : "/web/500"
+        },
+        "method" : "GET"
+      },
+      "header" : [ {
+        "key" : "Content-Type",
+        "value" : "application/json",
+        "disabled" : false
+      } ],
+      "cookie" : [ ],
+      "body" : "{\n  \"message\" : \"500 INTERNAL_SERVER_ERROR \\\"서버팀에 문의하세요\\\"\",\n  \"status\" : 500,\n  \"error\" : \"FAIL\"\n}",
+      "code" : 500
+    } ]
+  }, {
+    "id" : "web-list-success",
+    "name" : "/web/list",
+    "description" : "웹 성공테스트",
+    "variable" : [ ],
+    "event" : [ ],
+    "request" : {
+      "url" : {
+        "protocol" : "http",
+        "host" : "localhost",
+        "path" : "/web/list"
+      },
+      "method" : "GET"
+    },
+    "response" : [ {
+      "id" : "web-list-success",
+      "name" : "web-list-success",
+      "originalRequest" : {
+        "url" : {
+          "protocol" : "http",
+          "host" : "localhost",
+          "path" : "/web/list"
+        },
+        "method" : "GET"
+      },
+      "header" : [ {
+        "key" : "Content-Type",
+        "value" : "application/json",
+        "disabled" : false
+      } ],
+      "cookie" : [ ],
+      "body" : "{\n  \"data\" : [ {\n    \"id\" : \"deity\",\n    \"name\" : \"name\"\n  }, {\n    \"id\" : \"deity2\",\n    \"name\" : \"name2\"\n  } ],\n  \"status\" : 200,\n  \"error\" : \"SUCCESS\",\n  \"message\" : \"\"\n}",
+      "code" : 200
+    } ]
+  } ],
+  "event" : [ ],
+  "variable" : [ ]
+}
